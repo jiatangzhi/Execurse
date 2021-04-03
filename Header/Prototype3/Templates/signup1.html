@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://github.com/Aryid-crypt/Execurse/blob/main/Prototype3/Templates/signup.css">
+
+</head>
+<body>
+	<div class="mainscreen">
+		<div class="toppart">
+			<div class="herotext">
+				<h1>Sign Up Form</h1>
+			</div>
+		</div>
+	
+
+
+	<div class="bottompart">
+		<!-- Image Part -->
+		<div class="imgpart">
+			<img src="https://github.com/Aryid-crypt/Execurse/blob/main/Prototype3/Templates/5436.jpg" class="heroimg" alt="">
+		</div>
+
+
+
+	<!--Form part-->
+	<div class="formpart">
+		<form action="#" method="post">
+			<h2>Login information</h2>
+			<label for="username">Username</label><br>
+			<input class="inputbox" type="text" id="username" name="username" autocomplete="off"><br>
+		
+		
+			<label for="password">Password</label><br>
+			<input class="inputbox" type="password" id="password" name="password" autocomplete="off"><br>
+		
+		
+			<label for="confirm">Re-enter Password</label><br>
+			<input class ="inputbox" type="password" id="confirm" name="confirm" autocomplete="off"><br>
+		
+		
+			<label for="email">Email</label><br>
+			<input class="inputbox" type="text" id="email" name="email" autocomplete="off"><br>
+		
+		
+			<p class="inputbox">Terms and conditions:</p>
+			<textarea class = "inputbox" disabled="true" rows="8" cols="100">
+			*Terms and conditions here*
+			</textarea><br>
+			<label for="accepted">I accept the terms and conditions</label>
+			<input class="agree" type="checkbox" id="accepted" name="accepted" onclick="accept_terms(this);"><br>
+		
+			<!--<input class="submitbtn" type="submit" id="register" name="register" value="Register" disabled="true">-->
+			<!-- For Submit Button-->
+			<button class="submitbtn">Register</button>
+		</form>
+
+		</div>
+	</div>
+</div>	
+</body>
+</html>
