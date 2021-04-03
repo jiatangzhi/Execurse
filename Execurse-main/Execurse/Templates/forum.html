@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/header_style.css')}}"/>
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+  	<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<nav>
+    <ul>
+      <li class="logo">EXECURSE</li>
+      <li class="btn"><span class="fas fa-bars"</span></li>
+      <div class="items">
+				<li><a href="/forum">Forum</a></li>
+        <li><a href="/support_network">Support Network</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+				<li><a href="/dailyChallenges">Daily Challenges</a></li>
+				<li><a href="/dailyQuiz">Daily Quiz</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Logout</a></li>
+      </div>
+    </ul>
+  </nav>
+  <script type="text/javascript">
+    $('nav ul li.btn span').click(function(){
+      $('nav ul div.items').toggleClass("show");
+      $('nav ul li.btn span').toggleClass("show");
+    });
+  </script>
+	<h1 style="color:black; padding:10px;">Forum</h1>
+	{% if session["account"] == 1 %}
+		<form action="#" method="post">
+			<label for "subforum">Create new subforum</label><br>
+			<input type="text" id="subforum" name="subforum"><br>
+			<input type="submit" id="create" name="create" value="Create"><br>
+			{% with errors = get_flashed_messages() %}
+				{% if errors %}
+					{% for message in errors %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</form>
+	{% endif %}
+	<ul>
+		{% for subforum in subforums %}
+			<li><a href={{ url_for('subforum', name=subforum[0]) }} style="color:black; padding:10px;">{{ subforum[0] }}</a></li>
+			{% if session["account"] == 1 %}
+				<form action="{{ url_for('remove_subforum', name=subforum[0]) }}" method="post">
+					<input type="submit" value="Remove" style="color:black;">
+				</form>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</body>
+</html>

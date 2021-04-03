@@ -1,0 +1,31 @@
+DEPLOYMENT
+
+Deployment stategy
+This consists of 2 Steps:
+
+Step 1
+SETTING UP PORT FORWARDING
+
+Assuming you are on a network You will need access to your local network.
+You can do this by going to http://192.168.0.1/
+You will then need you settings login or settings password.
+To find this you can either look it up online or will need to look at your router depending on your ISP.
+You will then need to find your devices' local IP address on the network.
+Using this, you can find port forwarding usually under Advanced settings then Security.
+From here, you will need to create a new rule.
+Then enter your local IP and choose a port number.
+Enter this number for all port entires, set the protocol to TCP and Enable the rule.
+
+Step 2
+SELECTING THE PORT NUMBER AND RUNNING
+
+In the system files, there is a text document called HOST PORT.txt
+Opening this, enter your chosen port number after the colon, save it and close the text editor.
+Search "Whats my IP" into Google to find you public IP address.
+Run the file execurse.py using a python interpreter
+
+
+
+How to access it on any device connected to the internet:
+Open a web browser and enter you public IP adress followed by a colon followed by your chosen port number
+it will be in the form XYZ.XYZ.XYZ:XYZ where each XYZ is a number.

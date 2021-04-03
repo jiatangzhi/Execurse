@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/header_style.css')}}"/>
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+  	<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<center>
+<body>
+<nav>
+    <ul>
+      <li class="logo">EXECURSE</li>
+      <li class="btn"><span class="fas fa-bars"</span></li>
+      <div class="items">
+				<li><a href="/forum">Forum</a></li>
+        <li><a href="/support_network">Support Network</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+				<li><a href="/dailyChallenges">Daily Challenges</a></li>
+				<li><a href="/dailyQuiz">Daily Quiz</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Logout</a></li>
+      </div>
+    </ul>
+  </nav>
+  <script type="text/javascript">
+    $('nav ul li.btn span').click(function(){
+      $('nav ul div.items').toggleClass("show");
+      $('nav ul li.btn span').toggleClass("show");
+    });
+  </script>
+	<input type="button" id="showTableA" value="weekly"
+	style="height: 50px; width: 150px; left: 250; top: 250;">
+	<input type="button" id="showTableB" value="all_time"
+	style="height: 50px; width: 150px; left: 250; top: 250;" >
+	<table border="1" id="weekly">
+		<tr><th colspan="3">WEEKLY LEADER BOARD</th></tr>
+		<tr>
+			<th style="color:black; padding:10px;">Position</th>
+			<th style="color:black; padding:10px;">Username</th>
+			<th style="color:black; padding:10px;">Current Score</th>
+		</tr>
+		{% for score in weekly %}
+			<tr>
+				<td style="color:black; padding:10px;">{{ loop.index }}</td>
+				<td style="color:black; padding:10px;">{{ score[0] }}</td>
+				<td style="color:black; padding:10px;">{{ score[1] }}</td>
+			</tr>
+		{% endfor %}
+	</table >
+	<table border="1" id="all_time">
+		<tr><th colspan="3" >ALL TIME LEADER BOARD</th></tr>
+		<tr>
+			<th style="color:black; padding:10px;">Position</th>
+			<th style="color:black; padding:10px;">Username</th>
+			<th style="color:black; padding:10px;">Current Score</th>
+		</tr>
+		{% for score in all_time %}
+			<tr>
+				<td style="color:black; padding:10px;">{{ loop.index }}</td>
+				<td style="color:black; padding:10px;">{{ score[0] }}</td>
+				<td style="color:black; padding:10px;">{{ score[1] }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+<script type="text/javascript">
+
+var tableA = document.getElementById("weekly");
+var tableB = document.getElementById("all_time");
+
+var btnTabA = document.getElementById("showTableA");
+var btnTabB = document.getElementById("showTableB");
+
+btnTabA.onclick = function () {
+    tableA.style.display = "table";
+    tableB.style.display = "none";
+}
+btnTabB.onclick = function () {
+    tableA.style.display = "none";
+    tableB.style.display = "table";
+}
+</script>
+
+</body>
+<center>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/login.css') }}">
+</head>
+<body>
+	<div class="mainscreen">
+		<div class="toppart">
+			<div class="herotext">
+				<h1>Execurse</h1>
+			</div>
+		</div>
+
+	<div class="bottompart">
+		<!-- Image Part -->
+		<div class="imgpart">
+			<img src="{{ url_for('static', filename='5436.jpg') }}" class="heroimg" alt="">
+		</div>
+		
+	<!--form part-->
+	<div class="formpart">		
+	<form method="post">
+		<label for="username">Username</label><br>
+		<input class="inputbox" type="text" id="username" name="username" autocomplete="off"><br>
+		<label for ="password">Password</label><br>
+		<input class="inputbox" type="password" id="password" name="password"><br>
+		{% with errors = get_flashed_messages() %}
+			{% if errors %}
+				{% for message in errors %}
+					<p style="color: red">{{ message }}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<input class="submitbtn" type="submit" id="login" name="login" value="Login">
+		<p class="inputbox">Not registered? <a href="/signup">Create an account.</a></p>
+	
+	</form>
+
+</body>
+</html>

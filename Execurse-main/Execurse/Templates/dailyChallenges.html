@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/header_style.css')}}"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<center>
+<body>
+<nav>
+	<ul>
+		<li class="logo">EXECURSE</li>
+		<li class="btn"><span class="fas fa-bars"</span></li>
+		<div class="items">
+			<li><a href="/forum">Forum</a></li>
+			<li><a href="/support_network">Support Network</a></li>
+			<li><a href="/leaderboard">Leaderboard</a></li>
+			<li><a href="/settings">Settings</a></li>
+			<li><a href="/dailyChallenges">Daily Challenges</a></li>
+			<li><a href="/dailyQuiz">Daily Quiz</a></li>
+			<li><a href="/settings">Settings</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</div>
+	</ul>
+</nav>
+<script type="text/javascript">
+	$('nav ul li.btn span').click(function(){
+		$('nav ul div.items').toggleClass("show");
+		$('nav ul li.btn span').toggleClass("show");
+	});
+</script>
+	<h1> DAILY CHALLENGES</h1>
+	<h2>{{status}}</h2>
+	<h1>
+	<table border="1">
+
+		<tr>
+			<td>TASK</td>
+			<td>PROGRESS</td>
+		</tr>
+		{% for user in scores %} <!--  [:10] shows 10 records-->
+		<tr>
+				<td>{{tasks[0]}}</td>
+				<td>{{ user[0][0] }}/{{ user[0][1] }}</td>
+		</tr>
+		<tr>
+				<td>{{tasks[1]}}</td>
+				<td>{{ user[1][0] }}/{{ user[1][1] }}</td>
+		</tr>
+		<tr>
+				<td>{{tasks[2]}}</td>
+				<td>{{ user[2][0] }}/{{ user[2][1] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</h1>
+</body>
+</center>
+</html>

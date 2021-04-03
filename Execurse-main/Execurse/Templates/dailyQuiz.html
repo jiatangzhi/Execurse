@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/header_style.css')}}"/>
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+  	<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<nav>
+    <ul>
+      <li class="logo">EXECURSE</li>
+      <li class="btn"><span class="fas fa-bars"</span></li>
+      <div class="items">
+				<li><a href="/forum">Forum</a></li>
+        <li><a href="/support_network">Support Network</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+				<li><a href="/dailyChallenges">Daily Challenges</a></li>
+				<li><a href="/dailyQuiz">Daily Quiz</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Logout</a></li>
+      </div>
+    </ul>
+  </nav>
+  <script type="text/javascript">
+    $('nav ul li.btn span').click(function(){
+      $('nav ul div.items').toggleClass("show");
+      $('nav ul li.btn span').toggleClass("show");
+    });
+  </script>
+	<h1 style="color:black; padding:10px;">Forum</h1>
+	<center><h1> DAILY QUIZ <!--{{answer}}--></h1></center>
+	<center><h2> The rules are simple, 5 points for every correct answers and a x2
+	bonus for a perfect 15/15.</h2></center>
+		<h1><center>{{quiz_taken}}<h1></center>
+		{% for question in quiz[0:1] %} <!--  [:10] shows 10 records-->
+		<h2>{{question[0]}}</h2>
+		<form method="POST">
+		<h3>
+			<input type="radio"  id="a" name="Q1" value="a">
+			<label for="a">{{question[1]}}</label><br/>
+			<input type="radio"  id="b" name="Q1" value="b">
+			<label for="b">{{question[2]}}</label><br/>
+			<input type="radio"  id="c" name="Q1" value="c">
+			<label for="c">{{question[3]}}</label><br/>
+			<input type="radio"  id="d" name="Q1" value="d">
+			<label for="d">{{question[4]}}</label><br/>
+		</h3>
+		<input id="prodId" name="A1" type="hidden" value="{{question[5]}}">
+		{% endfor %}
+		{% for question in quiz[1:2] %} <!--  [:10] shows 10 records-->
+		<h2>{{question[0]}}</h2>
+		<h3>
+			<input type="radio"  id="a" name="Q2" value="a">
+			<label for="a">{{question[1]}}</label><br/>
+			<input type="radio"  id="b" name="Q2" value="b">
+			<label for="b">{{question[2]}}</label><br/>
+			<input type="radio"  id="c" name="Q2" value="c">
+			<label for="c">{{question[3]}}</label><br/>
+			<input type="radio"  id="d" name="Q2" value="d">
+			<label for="d">{{question[4]}}</label><br/>
+		</h3>
+		<input id="prodId" name="A2" type="hidden" value="{{question[5]}}">
+		{% endfor %}
+		{% for question in quiz[2:3] %} <!--  [:10] shows 10 records-->
+		<h2>{{question[0]}}</h2>
+
+		<h3>
+			<input type="radio"  id="a" name="Q3" value="a">
+			<label for="a">{{question[1]}}</label><br/>
+			<input type="radio"  id="b" name="Q3" value="b">
+			<label for="b">{{question[2]}}</label><br/>
+			<input type="radio"  id="c" name="Q3" value="c">
+			<label for="c">{{question[3]}}</label><br/>
+			<input type="radio"  id="d" name="Q3" value="d">
+			<label for="d">{{question[4]}}</label><br/>
+		</h3>
+		<input id="prodId" name="A3" type="hidden" value="{{question[5]}}">
+		{% endfor %}
+		<input type="submit" name="submission" value="Submit" style="height:50px; width:50px">
+	</form>
+
+
+	</table>
+</body>
+</html>

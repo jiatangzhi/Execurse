@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/header_style.css')}}"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li class="logo">EXECURSE</li>
+      <li class="btn"><span class="fas fa-bars"</span></li>
+      <div class="items">
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/support_network">Support Network</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+	<li><a href="/logout">Logout</a></li>
+      </div>
+    </ul>
+  </nav>
+  <h1 style="color:black; padding:10px;">403 Forbidden</h1>
+  <p style="color:black; padding:10px;">Accessed denied. You don't have permission to access this.</p>
+  <<script type="text/javascript">
+    $('nav ul li.btn span').click(function(){
+      $('nav ul div.items').toggleClass("show");
+      $('nav ul li.btn span').toggleClass("show");
+    });
+
+  </script>
+
+</body>
+</html>
