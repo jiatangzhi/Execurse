@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>Sign Up Form</h1>
+	<form action="#" method="post">
+		<label for "username">Username</label><br>
+		<input type="text" id="username" name="username"><br>
+		{% with errors = get_flashed_messages(category_filter=["username_error"]) %}
+			{% if errors %}
+				{% for message in errors %}
+					<p>{{ message }}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<label for "password">Password</label><br>
+		<input type="password" id="password" name="password"><br>
+		<label for "confirm">Re-enter Password</label><br>
+		<input type="password" id="confirm" name="confirm"><br>
+		{% with errors = get_flashed_messages(category_filter=["password_error"]) %}
+			{% if errors %}
+				{% for message in errors %}
+					<p>{{ message }}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<label for "email">Email</label><br>
+		<input type="text" id="email" name="email"><br>
+		{% with errors = get_flashed_messages(category_filter=["email_error"]) %}
+			{% if errors %}
+				{% for message in errors %}
+					<p>{{ message }}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<p>Terms and conditions:</p>
+		<textarea disabled="true" rows="8" cols="100">
+		*Terms and conditions here*
+		</textarea><br>
+		<label for="accepted">I accept the terms and conditions</label>
+		<input type="checkbox" id="accepted" name="accepted" onclick="accept_terms(this);"><br>
+		
+		<input type="submit" id="register" name="register" value="Register" disabled="true">
+	</form>
+
+	<script language="Javascript">
+		function accept_terms(checkbox) {
+			if(checkbox.checked == true) {
+				document.getElementById("register").disabled = false;
+			} else {
+				document.getElementById("register").disabled = true;
+			}
+		}
+	</script> 
+</body>
+</html>
