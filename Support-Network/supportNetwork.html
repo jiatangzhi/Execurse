@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>{{ session["username"] }}'s Support Network</h1>
+	<div>
+		<form action="#" method="post">
+			<label for "email">Email</label><br>
+			<input type="text" id="email" name="email"><br>
+			<input type="submit" id="add" name="add" value="Add email">
+		</form>
+	</div>
+		{% for person in network %}
+			<li>{{ person[2] }}
+				<form action="{{ url_for('remove_email', email_id=person[0]) }}" method="post">
+					<input type="submit" value="Remove">
+				</form>
+			</li>
+		{% endfor %}
+	<div>
+</body>
+</html>
