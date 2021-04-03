@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<header>
+	<ul>
+		<li><a href="/forum">Forum</a></li>
+		<li><a href="/support_network">Support Network</a></li>
+		<li><a href="/logout">Logout</a></li>
+	</ul>
+</header>
+<body>
+	<h1>{{ session["username"] }}'s support network</h1>
+	<div>
+		<form action="#" method="post">
+			<label for "email">Email</label><br>
+			<input type="text" id="email" name="email"><br>
+			{% with errors = get_flashed_messages(category_filter=["email_error"]) %}
+				{% if errors %}
+					{% for message in errors %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<label for "firstname">First name</label><br>
+			<input type="text" id="firstname" name="firstname"><br>
+			<label for "lastname">Last name</label><br>
+			<input type="text" id="lastname" name="lastname"><br>
+			{% with errors = get_flashed_messages(category_filter=["name_error"]) %}
+				{% if errors %}
+					{% for message in errors %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<label for "relation">What relation are they to you? If other fill out box below:</label><br>
+			<select id="relation" name="relation" onchange="reveal_other(this);">
+				<option value="Other">Other</option>
+				<option value="Father">Father</option>
+				<option value="Mother">Mother</option>
+				<option value="Brother">Brother</option>
+				<option value="Sister">Sister</option>
+				<option value="Grandparent">Grandparent</option>
+				<option value="Friend">Friend</option>
+			</select><br>
+			<input type="text" id="other" name="other"><br>
+			{% with errors = get_flashed_messages(category_filter=["relation_error"]) %}
+				{% if errors %}
+					{% for message in errors %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<input type="submit" id="add" name="add" value="Add email">
+		</form>
+	</div>
+	<div>
+		{% for person in network %}
+			<div>
+				<p>Email: {{ person[2] }}</p>
+				<p>Name: {{ person[3] }} {{ person[4] }}</p>
+				<p>Relation: {{ person[5] }}</p>
+				<form action="{{ url_for('remove_email', email_id=person[0]) }}" method="post">
+					<input type="submit" value="Remove">
+				</form>
+			</div>
+		{% endfor %}
+	</div>
+
+	<script language="Javascript">
+		function reveal_other(select){
+			if(select.value == "Other") {
+				document.getElementById("other").type = "text";
+			} else {
+				document.getElementById("other").type = "hidden";
+			}
+		}
+	</script>
+</body>
+</html>
