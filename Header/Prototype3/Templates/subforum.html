@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header_style.css')}}"/>
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+  	<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<nav>
+    <ul>
+      <li class="logo">EXECURSE</li>
+      <li class="btn"><span class="fas fa-bars"</span></li>
+      <div class="items">
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/support_network">Support Network</a></li>
+        <li><a href="/leaderboard">Leaderboard</a></li>
+        <li><a href="/settings">Settings</a></li>
+	<li><a href="/logout">Logout</a></li>
+      </div>
+    </ul>
+  </nav>
+<script type="text/javascript">
+    $('nav ul li.btn span').click(function(){
+      $('nav ul div.items').toggleClass("show");
+      $('nav ul li.btn span').toggleClass("show");
+    });
+  </script>
+	<h1 style="color:black; padding:10px;">{{ name }}</h1>
+	
+	<a href= {{ url_for('add_new_post', name=name) }} style="color:black; padding:10px;">Make New Post</a>
+	
+	{% for post in posts %}
+		
+		<h3 style="color:black; padding:10px;">{{ post[4] }}</h3><p style="color:black; padding:10px;">created on {{ post[7] }} by {{ post[2] }}</p>
+		
+		{% if not post[5] == "" %}
+			<a href={{ post[5] }} style="color:black; padding:10px;">{{ post[5] }}</a>
+		{% endif %}
+		
+		<p style="color:black; padding:10px;">{{ post[6] }}</p>
+		
+		<form action="{{ url_for('like_post', post_id=post[0], name=name) }}" method="post">
+			<span style="color:black; padding:10px;">{{ post[8] }}<input type="submit" value="Like" style="color:black;"></span>
+		</form>
+		
+		<button type="button" onclick="show_comments('postDiv{{ post[0] }}', this);" style="color:black;">Show Comments</button>
+		
+		<div id="postDiv{{ post[0] }}" style="display: none">
+			
+			<form action="{{ url_for('add_comment', post_id=post[0], name=name) }}" method="post">
+				<textarea id="comment" name="comment" style="color:black;">
+
+				</textarea><br>
+				<input type="submit" value="Add comment" style="color:black;">
+			</form>
+
+			{% for comment in comments %}
+					
+					{% if comment[3] == post[0] %}
+							
+							<p style="color:black; padding:10px;">{{ comment[2] }} commented {{ comment[4] }} at {{ comment[5] }}</p>
+							
+							<form action="{{ url_for('like_comment', comment_id=comment[0], name=name) }}" method="post">
+								<span style="color:black;">{{ comment[6] }}<input type="submit" value="Like" style="color:black;"></span>
+							</form>
+							
+							<button type="button" onclick="show_replies('commentDiv{{ comment[0] }}', this);" style="color:black;">Show Replies</button>
+							
+							<div id="commentDiv{{ comment[0] }}" style="display: none">
+								
+								{% for reply in replies %}
+									
+									{% if reply[7] == comment[0] %}
+										
+										<p style="color:black; padding:10px;">{{ reply[2] }} replies with {{ reply[4] }} at {{ reply[5] }}</p>
+										
+										<form action="{{ url_for('like_comment', comment_id=reply[0], name=name) }}" method="post">
+											<span style="color:black;">{{ reply[6] }}<input type="submit" value="Like" style="color:black;"></span>
+										</form>
+										
+										{% if session["account"] == 1 or session["userid"] == reply[1] %}
+											<form action="{{ url_for('remove_comment', comment_id=reply[0], name=name) }}" method="post">
+												<input type="submit" value="Remove Reply" style="color:black;">
+											</form>
+										{% endif %}
+									
+									{% endif %}
+
+								{% endfor %}
+								
+								<form action="{{ url_for('reply_comment', comment_id=comment[0], post_id=post[0], name=name) }}" method="post">
+									<textarea id="reply" name="reply" style="color:black;">
+
+									</textarea><br>
+									<input type="submit" value="Add reply" style="color:black;">
+								</form>
+							
+							</div>
+							
+							{% if session["account"] == 1 or session["userid"] == comment[1] %}
+								<form action="{{ url_for('remove_comment', comment_id=comment[0], name=name) }}" method="post">
+									<input type="submit" value="Remove Comment" style="color:black;">
+								</form>
+							{% endif %}
+					
+					{% endif %}
+			
+			{% endfor %}
+		
+		</div>
+		
+		{% if session["account"] == 1 or session["userid"] == post[1] %}
+			<form action="{{ url_for('remove_post', post_id=post[0], name=name) }}" method="post">
+				<input type="submit" value="Remove Post" style="color:black;">
+			</form>
+		{% endif %}
+	
+	{% endfor %}
+	<script language="Javascript">
+		
+		function show_comments(post, button) {
+			var x = document.getElementById(post)
+			if(x.style.display === "none") {
+				x.style.display = "block"
+				button.innerHTML = "Hide Comments"
+			} else {
+				x.style.display = "none"
+				button.innerHTML = "Show Comments"
+			}
+		}
+
+		function show_replies(post, button) {
+			var x = document.getElementById(post)
+			if(x.style.display === "none") {
+				x.style.display = "block"
+				button.innerHTML = "Hide Replies"
+			} else {
+				x.style.display = "none"
+				button.innerHTML = "Show Replies"
+			}
+		}
+	</script>
+</body>
+</html>
